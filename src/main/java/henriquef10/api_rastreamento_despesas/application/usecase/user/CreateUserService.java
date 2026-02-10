@@ -1,13 +1,10 @@
 package henriquef10.api_rastreamento_despesas.application.usecase.user;
 
 import henriquef10.api_rastreamento_despesas.core.entities.user.User;
-import henriquef10.api_rastreamento_despesas.core.usecases.user.CreateUserInput;
-import henriquef10.api_rastreamento_despesas.core.usecases.user.CreateUserOutput;
-import henriquef10.api_rastreamento_despesas.core.usecases.user.CreateUserUseCase;
+import henriquef10.api_rastreamento_despesas.core.usecases.user.create.CreateUserInput;
+import henriquef10.api_rastreamento_despesas.core.usecases.user.create.CreateUserOutput;
+import henriquef10.api_rastreamento_despesas.core.usecases.user.create.CreateUserUseCase;
 import henriquef10.api_rastreamento_despesas.repository.UserRepository;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
 
 public class CreateUserService implements CreateUserUseCase {
 
@@ -30,7 +27,8 @@ public class CreateUserService implements CreateUserUseCase {
 
         return new CreateUserOutput(
                 user.getId(),
-                user.getName()
+                user.getName(),
+                user.getLogin()
         );
 
     }

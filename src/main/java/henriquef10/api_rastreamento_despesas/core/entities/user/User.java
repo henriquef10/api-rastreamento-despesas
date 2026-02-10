@@ -31,10 +31,19 @@ public class User {
         this.password = password;
     }
 
+    public User(Long id, String name, String login) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+    }
+
     public User(Long id, String name, String login, String password, LocalDate createdAt, LocalDate updatedAt) {
         this.id = id;
         this.name = name;
         this.login = login;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
 }
