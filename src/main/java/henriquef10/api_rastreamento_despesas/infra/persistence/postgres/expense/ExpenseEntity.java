@@ -1,13 +1,9 @@
 package henriquef10.api_rastreamento_despesas.infra.persistence.postgres.expense;
 
-import henriquef10.api_rastreamento_despesas.core.entities.category.Category;
 import henriquef10.api_rastreamento_despesas.core.entities.expense.ExpenseStatus;
-import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.Category.CategoryEntity;
+import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.category.CategoryEntity;
 import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.user.UserEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,10 +34,12 @@ public class ExpenseEntity {
     private LocalDate createdAt;
     private LocalDate updatedAt;
 
-    @OneToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
 

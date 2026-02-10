@@ -1,3 +1,22 @@
 spring:
   application:
     name: api_rastreamento_despesas
+  datasource:
+    url: jdbc:postgresql://localhost:5432/expense_manage_dev
+    username: admin
+    password: admin_123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+

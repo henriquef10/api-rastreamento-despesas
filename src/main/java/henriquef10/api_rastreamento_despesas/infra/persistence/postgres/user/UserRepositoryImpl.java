@@ -28,30 +28,32 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> findByLogin(String login) throws UserNotFoundException {
         Optional<UserEntity> entity = this.jpaRepository.findByLogin(login);
 
-        if(entity.isEmpty()) {
-            throw new UserNotFoundException("User not found!");
-        }
-
         return entity.map(UserMapper::toDomain);
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return null;
+        Optional<UserEntity> entity = this.jpaRepository.findById(id);
+
+        return entity.map(UserMapper::toDomain);
     }
 
     @Override
     public void save(User user) {
 
+        UserEntity entity = UserMapper.toEntity(user);
+        this.jpaRepository.save(entity);
+
     }
 
     @Override
     public void delete(Long id) {
-
+        this.jpaRepository.deleteById(id);
     }
 
     @Override
     public void update(User user) {
-
+        UserEntity entity = UserMapper.toEntity(user);
+        this.jpaRepository.save(entity);
     }
 }

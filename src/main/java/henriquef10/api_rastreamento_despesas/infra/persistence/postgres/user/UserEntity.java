@@ -35,7 +35,7 @@ public class UserEntity {
 
     private LocalDate updatedAt;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "user")
     private List<ExpenseEntity> expenses;
 
 
