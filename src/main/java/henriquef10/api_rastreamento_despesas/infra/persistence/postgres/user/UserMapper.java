@@ -21,7 +21,6 @@ public class UserMapper {
         entity.setName(user.getName());
         entity.setLogin(user.getLogin());
         entity.setPassword(user.getPassword());
-
         entity.setCreatedAt(user.getCreatedAt());
         entity.setUpdatedAt(user.getUpdatedAt());
 
