@@ -14,9 +14,6 @@ public record FindExpenseOutput(
         ExpenseStatus status,
         LocalDate dueDate,
         LocalDate paymentDate,
-        Category category,
-        LocalDate createdAt,
-        LocalDate updatedAt,
-        Long user_id
+        String category
 ) {
 }

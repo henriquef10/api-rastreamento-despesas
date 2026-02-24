@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface FindByIdExpenseUseCase {
 
-    List<FindExpenseOutput> execute(Long id);
+    FindExpenseOutput execute(Long id);
 
 }
