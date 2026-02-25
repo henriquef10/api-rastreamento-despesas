@@ -20,6 +20,8 @@ public class User {
     private String login;
     private String password;
 
+    private UserRole role;
+
     private LocalDate createdAt;
     private LocalDate updatedAt;
 
@@ -31,17 +33,26 @@ public class User {
         this.password = password;
     }
 
+    public User(String name, String login, String password, UserRole role) {
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
     public User(Long id, String name, String login) {
         this.id = id;
         this.name = name;
         this.login = login;
     }
 
-    public User(Long id, String name, String login, String password, LocalDate createdAt, LocalDate updatedAt) {
+
+    public User(Long id, String name, String login, String password, UserRole role, LocalDate createdAt, LocalDate updatedAt) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.password = password;
+        this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

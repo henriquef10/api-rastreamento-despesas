@@ -10,6 +10,7 @@ public class UserMapper {
                 entity.getName(),
                 entity.getLogin(),
                 entity.getPassword(),
+                entity.getRole(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
         );
@@ -18,9 +19,11 @@ public class UserMapper {
     public static UserEntity toEntity(User user) {
         UserEntity entity = new UserEntity();
 
+        entity.setId(user.getId());
         entity.setName(user.getName());
         entity.setLogin(user.getLogin());
         entity.setPassword(user.getPassword());
+        entity.setRole(user.getRole());
         entity.setCreatedAt(user.getCreatedAt());
         entity.setUpdatedAt(user.getUpdatedAt());
 
