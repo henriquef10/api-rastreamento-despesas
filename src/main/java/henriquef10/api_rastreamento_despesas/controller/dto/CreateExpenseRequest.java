@@ -1,11 +1,11 @@
-package henriquef10.api_rastreamento_despesas.core.usecases.expense.create;
+package henriquef10.api_rastreamento_despesas.controller.dto;
 
 import henriquef10.api_rastreamento_despesas.core.entities.expense.ExpenseStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record CreateExpenseInput(
+public record CreateExpenseRequest(
         Long user_id,
         String name,
         String description,

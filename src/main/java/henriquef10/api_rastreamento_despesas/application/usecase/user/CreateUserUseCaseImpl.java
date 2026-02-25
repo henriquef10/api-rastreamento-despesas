@@ -5,12 +5,14 @@ import henriquef10.api_rastreamento_despesas.core.usecases.user.create.CreateUse
 import henriquef10.api_rastreamento_despesas.core.usecases.user.create.CreateUserOutput;
 import henriquef10.api_rastreamento_despesas.core.usecases.user.create.CreateUserUseCase;
 import henriquef10.api_rastreamento_despesas.repository.UserRepository;
+import org.springframework.stereotype.Component;
 
-public class CreateUserService implements CreateUserUseCase {
+@Component
+public class CreateUserUseCaseImpl implements CreateUserUseCase {
 
     private final UserRepository userRepository;
 
-    public CreateUserService(UserRepository userRepository) {
+    public CreateUserUseCaseImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -20,7 +22,8 @@ public class CreateUserService implements CreateUserUseCase {
         User user = new User(
                 input.name(),
                 input.login(),
-                input.password()
+                input.password(),
+                input.role()
         );
 
         this.userRepository.save(user);
@@ -28,7 +31,8 @@ public class CreateUserService implements CreateUserUseCase {
         return new CreateUserOutput(
                 user.getId(),
                 user.getName(),
-                user.getLogin()
+                user.getLogin(),
+                user.getRole()
         );
 
     }

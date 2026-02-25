@@ -2,18 +2,19 @@ package henriquef10.api_rastreamento_despesas.application.usecase.user;
 
 import henriquef10.api_rastreamento_despesas.core.entities.user.User;
 import henriquef10.api_rastreamento_despesas.core.exception.user.UserNotFoundException;
-import henriquef10.api_rastreamento_despesas.core.usecases.user.find.FindByIdUserUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.user.find.FindByLoginUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.user.find.FindUserOutput;
 import henriquef10.api_rastreamento_despesas.repository.UserRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-public class FindByloginUserService implements FindByLoginUseCase {
+@Component
+public class FindByloginUserUseCaseImpl implements FindByLoginUseCase {
 
     private final UserRepository userRepository;
 
-    public FindByloginUserService(UserRepository userRepository) {
+    public FindByloginUserUseCaseImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

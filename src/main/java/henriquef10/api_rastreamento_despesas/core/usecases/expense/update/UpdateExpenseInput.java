@@ -10,7 +10,6 @@ public record UpdateExpenseInput(
         String name,
         String description,
         BigDecimal amount,
-        ExpenseStatus status,
         LocalDate dueDate,
         LocalDate paymentDate,
         Long category_id

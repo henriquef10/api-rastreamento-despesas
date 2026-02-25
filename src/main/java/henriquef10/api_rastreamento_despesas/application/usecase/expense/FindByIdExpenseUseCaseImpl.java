@@ -4,14 +4,14 @@ import henriquef10.api_rastreamento_despesas.core.entities.expense.Expense;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindByIdExpenseUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindExpenseOutput;
 import henriquef10.api_rastreamento_despesas.repository.ExpenseRepository;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
-
-public class FindByIdExpenseService implements FindByIdExpenseUseCase {
+@Component
+public class FindByIdExpenseUseCaseImpl implements FindByIdExpenseUseCase {
 
     private final ExpenseRepository expenseRepository;
 
-    public FindByIdExpenseService(ExpenseRepository expenseRepository) {
+    public FindByIdExpenseUseCaseImpl(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
 

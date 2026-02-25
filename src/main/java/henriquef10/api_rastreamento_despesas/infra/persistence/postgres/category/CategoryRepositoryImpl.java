@@ -3,10 +3,12 @@ package henriquef10.api_rastreamento_despesas.infra.persistence.postgres.categor
 import henriquef10.api_rastreamento_despesas.core.entities.category.Category;
 import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.category.jpa.CategoryJpaRepository;
 import henriquef10.api_rastreamento_despesas.repository.CategoryRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class CategoryRepositoryImpl implements CategoryRepository {
 
     private CategoryJpaRepository categoryJpaRepository;

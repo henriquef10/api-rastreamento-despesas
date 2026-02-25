@@ -42,5 +42,15 @@ public class ExpenseEntity {
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
+    @PrePersist
+    private void prePersist() {
+        this.createdAt = LocalDate.now();
+        this.updatedAt = LocalDate.now();
+    }
+
+    @PreUpdate
+    private void preUpdate() {
+        this.updatedAt = LocalDate.now();
+    }
 
 }

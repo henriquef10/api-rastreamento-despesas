@@ -6,12 +6,14 @@ import henriquef10.api_rastreamento_despesas.core.usecases.user.update.UpdateUse
 import henriquef10.api_rastreamento_despesas.core.usecases.user.update.UpdateUserOutput;
 import henriquef10.api_rastreamento_despesas.core.usecases.user.update.UpdateUserUseCase;
 import henriquef10.api_rastreamento_despesas.repository.UserRepository;
+import org.springframework.stereotype.Component;
 
-public class UpdateUserService implements UpdateUserUseCase {
+@Component
+public class UpdateUserUseCaseImpl implements UpdateUserUseCase {
 
     private final UserRepository userRepository;
 
-    public UpdateUserService(UserRepository userRepository) {
+    public UpdateUserUseCaseImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

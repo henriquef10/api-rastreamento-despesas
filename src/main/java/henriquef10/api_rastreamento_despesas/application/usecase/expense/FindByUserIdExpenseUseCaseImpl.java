@@ -2,17 +2,17 @@ package henriquef10.api_rastreamento_despesas.application.usecase.expense;
 
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindExpenseByUserIdUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindExpenseOutput;
-import henriquef10.api_rastreamento_despesas.core.usecases.user.find.FindByIdUserUseCase;
-import henriquef10.api_rastreamento_despesas.core.usecases.user.find.FindUserOutput;
 import henriquef10.api_rastreamento_despesas.repository.ExpenseRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class FindByUserIdExpenseService implements FindExpenseByUserIdUseCase {
+@Component
+public class FindByUserIdExpenseUseCaseImpl implements FindExpenseByUserIdUseCase {
 
     private final ExpenseRepository expenseRepository;
 
-    public FindByUserIdExpenseService(ExpenseRepository expenseRepository) {
+    public FindByUserIdExpenseUseCaseImpl(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
 

@@ -3,10 +3,12 @@ package henriquef10.api_rastreamento_despesas.infra.persistence.postgres.expense
 import henriquef10.api_rastreamento_despesas.core.entities.expense.Expense;
 import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.expense.jpa.ExpenseJpaRepository;
 import henriquef10.api_rastreamento_despesas.repository.ExpenseRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class ExpenseRepositoryImpl implements ExpenseRepository {
 
     private final ExpenseJpaRepository expenseJpaRepository;
