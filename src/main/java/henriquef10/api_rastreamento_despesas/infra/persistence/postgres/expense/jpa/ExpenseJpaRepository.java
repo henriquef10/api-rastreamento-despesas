@@ -11,4 +11,6 @@ public interface ExpenseJpaRepository extends JpaRepository<ExpenseEntity, Long>
     @Query("SELECT e FROM ExpenseEntity e WHERE e.user.id = :userId")
     List<ExpenseEntity> findAllByUserId(Long userId);
 
+    void deleteByIdAndUser_Id(Long id, Long userId);
+
 }

@@ -14,6 +14,6 @@ public record UpdateExpenseOutput(
         ExpenseStatus status,
         LocalDate dueDate,
         LocalDate paymentDate,
-        Category category
+        String category
 ) {
 }

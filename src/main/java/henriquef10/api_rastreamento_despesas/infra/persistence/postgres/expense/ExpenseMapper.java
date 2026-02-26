@@ -1,6 +1,8 @@
 package henriquef10.api_rastreamento_despesas.infra.persistence.postgres.expense;
 
 import henriquef10.api_rastreamento_despesas.core.entities.expense.Expense;
+import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.category.CategoryMapper;
+import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.user.UserMapper;
 
 public class ExpenseMapper {
 
@@ -12,6 +14,11 @@ public class ExpenseMapper {
         entity.setAmount(domain.getAmount());
         entity.setDueDate(domain.getDueDate());
         entity.setStatus(domain.getStatus());
+        entity.setCreatedAt(domain.getCreatedAt());
+        entity.setUpdatedAt(domain.getUpdatedAt());
+        entity.setCategory(CategoryMapper.toEntity(domain.getCategory()));
+        entity.setUser(UserMapper.toEntity(domain.getUser()));
+
         return entity;
     }
 
@@ -24,6 +31,11 @@ public class ExpenseMapper {
         expense.setAmount(entity.getAmount());
         expense.setDueDate(entity.getDueDate());
         expense.setStatus(entity.getStatus());
+        expense.setCreatedAt(entity.getCreatedAt());
+        expense.setUpdatedAt(entity.getUpdatedAt());
+        expense.setCategory(CategoryMapper.toDomain(entity.getCategory()));
+        expense.setUser(UserMapper.toDomain(entity.getUser()));
+
         return expense;
 
     }

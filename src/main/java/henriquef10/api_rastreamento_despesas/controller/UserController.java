@@ -65,7 +65,7 @@ public class UserController {
     }
 
 
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<ApiResponse> create(@RequestBody CreateUserRequest request){
 
         CreateUserOutput output = this.createUserUseCase.execute(new CreateUserInput(
@@ -82,7 +82,7 @@ public class UserController {
                 )
         );
 
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> update(@RequestBody UpdateUserRequest request, @PathVariable Long id){

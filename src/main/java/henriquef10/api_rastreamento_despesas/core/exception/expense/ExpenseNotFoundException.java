@@ -1,0 +1,7 @@
+package henriquef10.api_rastreamento_despesas.core.exception.expense;
+
+public class ExpenseNotFoundException extends RuntimeException {
+    public ExpenseNotFoundException(String message) {
+        super(message);
+    }
+}

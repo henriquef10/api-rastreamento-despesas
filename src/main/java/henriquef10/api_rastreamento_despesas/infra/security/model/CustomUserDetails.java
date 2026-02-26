@@ -2,6 +2,7 @@ package henriquef10.api_rastreamento_despesas.infra.security.model;
 
 import henriquef10.api_rastreamento_despesas.core.entities.user.User;
 import henriquef10.api_rastreamento_despesas.core.entities.user.UserRole;
+import lombok.Getter;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@Getter
 public class CustomUserDetails implements UserDetails {
 
     private final User user;

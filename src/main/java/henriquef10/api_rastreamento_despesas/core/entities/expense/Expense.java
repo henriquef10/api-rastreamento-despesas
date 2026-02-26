@@ -2,6 +2,8 @@ package henriquef10.api_rastreamento_despesas.core.entities.expense;
 
 import henriquef10.api_rastreamento_despesas.core.entities.category.Category;
 import henriquef10.api_rastreamento_despesas.core.entities.user.User;
+import henriquef10.api_rastreamento_despesas.core.exception.expense.ExpenseAlreadyPaidException;
+import henriquef10.api_rastreamento_despesas.core.exception.expense.ExpensePaymentBeforeCreationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,11 +36,11 @@ public class Expense {
     public void pay(LocalDate paymentDate) {
 
         if(paymentDate.isBefore(this.createdAt)){
-            throw new IllegalArgumentException("Payment date cannot be before expense creation date");
+            throw new ExpensePaymentBeforeCreationException("Payment date cannot be before expense creation date");
         }
 
         if(this.status.equals(ExpenseStatus.PAID)){
-            throw new IllegalStateException("Expense already paid");
+            throw new ExpenseAlreadyPaidException("Expense already paid");
         }
 
         this.status = ExpenseStatus.PAID;

@@ -3,6 +3,7 @@ package henriquef10.api_rastreamento_despesas.infra.persistence.postgres.expense
 import henriquef10.api_rastreamento_despesas.core.entities.expense.Expense;
 import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.expense.jpa.ExpenseJpaRepository;
 import henriquef10.api_rastreamento_despesas.repository.ExpenseRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -39,7 +40,13 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
     }
 
     @Override
-    public void delete(Long id) {
+    @Transactional
+    public void delete(Long id, Long userId) {
+        this.expenseJpaRepository.deleteByIdAndUser_Id(id, userId);
+    }
+
+    @Override
+    public void delete(long id) {
         this.expenseJpaRepository.deleteById(id);
     }
 

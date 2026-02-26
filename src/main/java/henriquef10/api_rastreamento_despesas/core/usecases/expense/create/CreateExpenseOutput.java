@@ -14,7 +14,6 @@ public record CreateExpenseOutput(
         ExpenseStatus status,
         LocalDate dueDate,
         LocalDate paymentDate,
-        Category category,
-        Long user_id
+        Category category
 ) {
 }

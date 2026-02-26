@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record CreateExpenseRequest(
-        Long user_id,
         String name,
         String description,
         BigDecimal amount,
