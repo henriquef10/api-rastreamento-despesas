@@ -41,7 +41,6 @@ public class UpdateExpenseUseCaseImpl implements UpdateExpenseUseCase {
         expense.setDescription(input.description());
         expense.setAmount(input.amount());
         expense.setDueDate(input.dueDate());
-        expense.setPaymentDate(input.paymentDate());
         expense.setCategory(category);
 
         this.expenseRepository.save(expense);

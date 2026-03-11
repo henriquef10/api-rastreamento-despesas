@@ -15,6 +15,8 @@ import henriquef10.api_rastreamento_despesas.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class CreateExpenseUseCaseImpl implements CreateExpenseUseCase {
 
@@ -45,10 +47,19 @@ public class CreateExpenseUseCaseImpl implements CreateExpenseUseCase {
         expense.setName(input.name());
         expense.setDescription(input.description());
         expense.setAmount(input.amount());
-        expense.setStatus(ExpenseStatus.PENDING);
         expense.setDueDate(input.dueDate());
         expense.setPaymentDate(input.paymentDate());
         expense.setUser(user);
+
+        if(input.paymentDate() != null){
+            expense.setStatus(ExpenseStatus.PAID);
+        }else if (input.dueDate() != null && input.dueDate().isBefore(LocalDate.now())){
+            expense.setStatus(ExpenseStatus.PENDING);
+        }else if(input.dueDate() != null && input.dueDate().isAfter(LocalDate.now())){
+            expense.setStatus(ExpenseStatus.DUE);
+        }else{
+            expense.setStatus(ExpenseStatus.PENDING);
+        }
 
         Category category = this.categoryRepository.findById(input.category_id()).orElseThrow(() -> new EntityNotFoundException("Category not found"));
 

@@ -3,7 +3,9 @@ package henriquef10.api_rastreamento_despesas.controller;
 import henriquef10.api_rastreamento_despesas.application.exception.ForbiddenException;
 import henriquef10.api_rastreamento_despesas.application.exception.UnauthenticatedException;
 import henriquef10.api_rastreamento_despesas.controller.dto.ExceptionResponse;
+import henriquef10.api_rastreamento_despesas.core.exception.category.CategoryNotFoundException;
 import henriquef10.api_rastreamento_despesas.core.exception.expense.ExpenseAlreadyPaidException;
+import henriquef10.api_rastreamento_despesas.core.exception.expense.ExpenseNotFoundException;
 import henriquef10.api_rastreamento_despesas.core.exception.expense.ExpensePaymentBeforeCreationException;
 import henriquef10.api_rastreamento_despesas.core.exception.user.UserAlreadyExistsException;
 import henriquef10.api_rastreamento_despesas.core.exception.user.UserNotFoundException;
@@ -18,6 +20,16 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleCategoryNotFoundException(CategoryNotFoundException ex) {
+        ExceptionResponse error = new ExceptionResponse(
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
 
     @ExceptionHandler(UnauthenticatedException.class)
     public ResponseEntity<ExceptionResponse> handleUnauthenticatedException(UnauthenticatedException ex) {
@@ -51,6 +63,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleUserNotFoundException(UserNotFoundException ex) {
+        ExceptionResponse error = new ExceptionResponse(
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(ExpenseNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleExpenseNotFoundException(ExpenseNotFoundException ex) {
         ExceptionResponse error = new ExceptionResponse(
                 HttpStatus.NOT_FOUND.value(),
                 ex.getMessage(),

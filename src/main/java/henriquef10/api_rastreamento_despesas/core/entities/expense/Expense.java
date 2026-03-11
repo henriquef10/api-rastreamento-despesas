@@ -48,4 +48,9 @@ public class Expense {
 
     }
 
+    public void removePayment(){
+        this.status = ExpenseStatus.PENDING;
+        this.paymentDate = null;
+    }
+
 }

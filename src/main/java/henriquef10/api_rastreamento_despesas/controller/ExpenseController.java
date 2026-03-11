@@ -12,6 +12,8 @@ import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindById
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindExpenseByUserIdUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.payment.PaymentExpenseOutput;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.payment.PaymentExpenseUseCase;
+import henriquef10.api_rastreamento_despesas.core.usecases.expense.payment.PaymentRemoveExpenseOutput;
+import henriquef10.api_rastreamento_despesas.core.usecases.expense.payment.PaymentRemoveExpenseUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.update.UpdateExpenseInput;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.update.UpdateExpenseOutput;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.update.UpdateExpenseUseCase;
@@ -26,18 +28,19 @@ import java.time.LocalDate;
 public class ExpenseController {
 
 
-    private FindAllExpenseUseCase findAllExpenseUseCase;
-    private FindByIdExpenseUseCase findByIdExpenseUseCase;
-    private CreateExpenseUseCase createExpenseUseCase;
-    private UpdateExpenseUseCase updateExpenseUseCase;
-    private DeleteExpenseUseCase deleteExpenseUseCase;
-    private PaymentExpenseUseCase paymentExpenseUseCase;
+    private final FindAllExpenseUseCase findAllExpenseUseCase;
+    private final FindByIdExpenseUseCase findByIdExpenseUseCase;
+    private final CreateExpenseUseCase createExpenseUseCase;
+    private final UpdateExpenseUseCase updateExpenseUseCase;
+    private final DeleteExpenseUseCase deleteExpenseUseCase;
+    private final PaymentExpenseUseCase paymentExpenseUseCase;
+    private final PaymentRemoveExpenseUseCase paymentRemoveExpenseUseCase;
 
     public ExpenseController(
             FindAllExpenseUseCase findAllExpenseUseCase,
             FindByIdExpenseUseCase findByIdExpenseUseCase, CreateExpenseUseCase createExpenseUseCase,
             UpdateExpenseUseCase updateExpenseUseCase, DeleteExpenseUseCase deleteExpenseUseCase,
-            PaymentExpenseUseCase paymentExpenseUseCase
+            PaymentExpenseUseCase paymentExpenseUseCase, PaymentRemoveExpenseUseCase paymentRemoveExpenseUseCase
     ) {
         this.findAllExpenseUseCase = findAllExpenseUseCase;
         this.findByIdExpenseUseCase = findByIdExpenseUseCase;
@@ -45,6 +48,7 @@ public class ExpenseController {
         this.updateExpenseUseCase = updateExpenseUseCase;
         this.deleteExpenseUseCase = deleteExpenseUseCase;
         this.paymentExpenseUseCase = paymentExpenseUseCase;
+        this.paymentRemoveExpenseUseCase = paymentRemoveExpenseUseCase;
     }
 
     @GetMapping
@@ -93,7 +97,6 @@ public class ExpenseController {
                 request.description(),
                 request.amount(),
                 request.dueDate(),
-                request.paymentDate(),
                 request.category_id()
         ));
 
@@ -123,6 +126,18 @@ public class ExpenseController {
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(
                 "Despesa paga com sucesso!",
+                output
+        ));
+
+    }
+
+    @PutMapping("/payment/remove/{id}")
+    public ResponseEntity<ApiResponse> removePayment(@PathVariable Long id){
+
+        PaymentRemoveExpenseOutput output = this.paymentRemoveExpenseUseCase.execute(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(
+                "Pagamento removido com sucesso!",
                 output
         ));
 

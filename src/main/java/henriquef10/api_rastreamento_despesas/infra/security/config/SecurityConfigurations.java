@@ -27,11 +27,10 @@ public class SecurityConfigurations {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable)
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(
-                        authorize -> authorize
-                                .requestMatchers(HttpMethod.POST, "/expenses").hasRole("USER")
+                .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                                 .requestMatchers(
@@ -39,6 +38,15 @@ public class SecurityConfigurations {
                                         "/swagger-ui.html",
                                         "/v3/api-docs/**"
                                 ).permitAll()
+                                .requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/categories").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/categories/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/categories/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/expenses").hasRole("USER")
+                                .requestMatchers(HttpMethod.PUT, "/expenses").hasRole("USER")
+                                .requestMatchers(HttpMethod.PUT, "/expenses/payment/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.PUT, "/expenses/payment/remove/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.DELETE, "/expenses").hasRole("USER")
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

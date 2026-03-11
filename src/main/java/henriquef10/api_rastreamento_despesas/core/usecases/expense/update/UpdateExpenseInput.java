@@ -11,7 +11,6 @@ public record UpdateExpenseInput(
         String description,
         BigDecimal amount,
         LocalDate dueDate,
-        LocalDate paymentDate,
         Long category_id
 ) {
 }

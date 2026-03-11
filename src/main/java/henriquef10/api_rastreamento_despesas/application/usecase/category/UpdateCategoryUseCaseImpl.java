@@ -1,6 +1,7 @@
 package henriquef10.api_rastreamento_despesas.application.usecase.category;
 
 import henriquef10.api_rastreamento_despesas.core.entities.category.Category;
+import henriquef10.api_rastreamento_despesas.core.exception.category.CategoryNotFoundException;
 import henriquef10.api_rastreamento_despesas.core.usecases.category.CategoryInput;
 import henriquef10.api_rastreamento_despesas.core.usecases.category.CategoryOutput;
 import henriquef10.api_rastreamento_despesas.core.usecases.category.UpdateCategoryUseCase;
@@ -21,7 +22,7 @@ public class UpdateCategoryUseCaseImpl implements UpdateCategoryUseCase {
     @Override
     public CategoryOutput execute(CategoryInput input) {
 
-        Category category = this.categoryRepository.findById(input.id()).orElseThrow(() -> new EntityNotFoundException("Category not found"));
+        Category category = this.categoryRepository.findById(input.id()).orElseThrow(() -> new CategoryNotFoundException("Category not found"));
 
         category.setName(input.name());
         category.setDescription(input.description());

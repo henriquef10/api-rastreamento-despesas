@@ -1,5 +1,7 @@
 package henriquef10.api_rastreamento_despesas.infra.security.jwt;
 
+import henriquef10.api_rastreamento_despesas.application.exception.UnauthenticatedException;
+import henriquef10.api_rastreamento_despesas.core.entities.user.User;
 import henriquef10.api_rastreamento_despesas.infra.security.model.CustomUserDetails;
 import henriquef10.api_rastreamento_despesas.repository.UserRepository;
 import jakarta.servlet.FilterChain;
@@ -32,7 +34,10 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if(token != null) {
             var login = tokenService.validateToken(token);
-            UserDetails user = new CustomUserDetails(userRepository.findByLogin(login).orElseThrow(() -> new RuntimeException("User not found")));
+
+            User entity = userRepository.findByLogin(login).orElseThrow(() -> new UnauthenticatedException("Token is not valid"));
+
+            UserDetails user = new CustomUserDetails(entity);
 
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);

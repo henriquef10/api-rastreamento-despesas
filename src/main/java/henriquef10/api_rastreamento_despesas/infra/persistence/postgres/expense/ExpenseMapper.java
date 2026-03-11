@@ -14,6 +14,7 @@ public class ExpenseMapper {
         entity.setAmount(domain.getAmount());
         entity.setDueDate(domain.getDueDate());
         entity.setStatus(domain.getStatus());
+        entity.setPaymentDate(domain.getPaymentDate());
         entity.setCreatedAt(domain.getCreatedAt());
         entity.setUpdatedAt(domain.getUpdatedAt());
         entity.setCategory(CategoryMapper.toEntity(domain.getCategory()));
@@ -31,6 +32,7 @@ public class ExpenseMapper {
         expense.setAmount(entity.getAmount());
         expense.setDueDate(entity.getDueDate());
         expense.setStatus(entity.getStatus());
+        expense.setPaymentDate(entity.getPaymentDate());
         expense.setCreatedAt(entity.getCreatedAt());
         expense.setUpdatedAt(entity.getUpdatedAt());
         expense.setCategory(CategoryMapper.toDomain(entity.getCategory()));
