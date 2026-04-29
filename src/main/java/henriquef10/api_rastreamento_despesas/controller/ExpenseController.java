@@ -3,6 +3,8 @@ package henriquef10.api_rastreamento_despesas.controller;
 import henriquef10.api_rastreamento_despesas.controller.dto.ApiResponse;
 import henriquef10.api_rastreamento_despesas.controller.dto.CreateExpenseRequest;
 import henriquef10.api_rastreamento_despesas.controller.dto.UpdateExpenseRequest;
+import henriquef10.api_rastreamento_despesas.core.dto.PageQuery;
+import henriquef10.api_rastreamento_despesas.core.entities.expense.ExpenseStatus;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.DeleteExpenseUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.create.CreateExpenseInput;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.create.CreateExpenseOutput;
@@ -10,6 +12,7 @@ import henriquef10.api_rastreamento_despesas.core.usecases.expense.create.Create
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindAllExpenseUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindByIdExpenseUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.FindExpenseByUserIdUseCase;
+import henriquef10.api_rastreamento_despesas.core.usecases.expense.find.filters.ExpenseFilter;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.payment.PaymentExpenseOutput;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.payment.PaymentExpenseUseCase;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.payment.PaymentRemoveExpenseOutput;
@@ -17,6 +20,7 @@ import henriquef10.api_rastreamento_despesas.core.usecases.expense.payment.Payme
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.update.UpdateExpenseInput;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.update.UpdateExpenseOutput;
 import henriquef10.api_rastreamento_despesas.core.usecases.expense.update.UpdateExpenseUseCase;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,9 +56,27 @@ public class ExpenseController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse> findAll(){
+    public ResponseEntity<ApiResponse> findAll(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) ExpenseStatus status,
+            @RequestParam(required = false) LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "ASC") String direction
+    ){
 
-        return ResponseEntity.ok(new ApiResponse(null, this.findAllExpenseUseCase.execute()));
+        ExpenseFilter filter = new ExpenseFilter(
+            search, categoryId, status, startDate, endDate
+        );
+
+        PageQuery pageQuery = new PageQuery(
+                page, size, sortBy, direction
+        );
+
+        return ResponseEntity.ok(new ApiResponse(null, this.findAllExpenseUseCase.execute(filter, pageQuery)));
 
     }
 

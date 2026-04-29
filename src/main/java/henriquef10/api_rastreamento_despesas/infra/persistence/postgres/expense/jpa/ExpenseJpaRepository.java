@@ -2,11 +2,12 @@ package henriquef10.api_rastreamento_despesas.infra.persistence.postgres.expense
 
 import henriquef10.api_rastreamento_despesas.infra.persistence.postgres.expense.ExpenseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ExpenseJpaRepository extends JpaRepository<ExpenseEntity, Long> {
+public interface ExpenseJpaRepository extends JpaRepository<ExpenseEntity, Long>, JpaSpecificationExecutor<ExpenseEntity> {
 
     @Query("SELECT e FROM ExpenseEntity e WHERE e.user.id = :userId")
     List<ExpenseEntity> findAllByUserId(Long userId);
